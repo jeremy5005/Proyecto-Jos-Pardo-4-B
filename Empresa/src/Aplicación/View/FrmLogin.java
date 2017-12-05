@@ -1,4 +1,4 @@
-package Aplicación.View;
+package AplicaciÃ³n.View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Aplicación.DAO.ConexiónBD;
+import AplicaciÃ³n.DAO.ConexiÃ³nBD;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,11 +28,12 @@ public class FrmLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField TxtUsuario;
-	private JPasswordField TxtContraseña;
+	private JPasswordField TxtContraseÃ±a;
 	private JButton BtnIngresar;
 	private JButton BtnCancelar;
 	private JButton BtnSalir;
 	FrmPrincipal p=new FrmPrincipal();
+	FrmPrincipal prin=new FrmPrincipal();
 
 	/**
 	 * Launch the application.
@@ -83,9 +84,9 @@ public class FrmLogin extends JFrame {
 		contentPane.add(TxtUsuario);
 		TxtUsuario.setColumns(10);
 		
-		TxtContraseña = new JPasswordField();
-		TxtContraseña.setBounds(164, 121, 86, 20);
-		contentPane.add(TxtContraseña);
+		TxtContraseÃ±a = new JPasswordField();
+		TxtContraseÃ±a.setBounds(164, 121, 86, 20);
+		contentPane.add(TxtContraseÃ±a);
 		
 		BtnIngresar = new JButton("Ingresar");
 		
@@ -125,11 +126,11 @@ public class FrmLogin extends JFrame {
 			public void keyPressed(KeyEvent arg0) {
 			if(arg0.getKeyCode()==KeyEvent.VK_ENTER)
 			{
-				TxtContraseña.requestFocus();
+				TxtContraseÃ±a.requestFocus();
 			}
 			}
 		});
-		TxtContraseña.addKeyListener(new KeyAdapter() {
+		TxtContraseÃ±a.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 			if(arg0.getKeyCode()==KeyEvent.VK_ENTER)
@@ -142,17 +143,17 @@ public class FrmLogin extends JFrame {
 	
 	public void ingresar()
 	{
-		ConexiónBD conex=new ConexiónBD();
+		ConexiÃ³nBD conex=new ConexiÃ³nBD();
 		Connection con=null;
 		String usuario=TxtUsuario.getText();
-		char[] contra=TxtContraseña.getPassword();
-		String contraseña=new String(contra);
+		char[] contra=TxtContraseÃ±a.getPassword();
+		String contraseÃ±a=new String(contra);
         Statement stmt=null;		
 		ResultSet rs=null;
         try {
-			con=conex.ObtenerConexión();
+			con=conex.ObtenerConexiÃ³n();
 			stmt=con.createStatement();
-			rs=stmt.executeQuery("select * from Usuario where UserName='"+usuario+"' and Contraseña='"+contraseña+"'");
+			rs=stmt.executeQuery("select * from Usuario where UserName='"+usuario+"' and ContraseÃ±a='"+contraseÃ±a+"'");
 			
 			if(rs!=null)
 			{
@@ -189,13 +190,13 @@ public class FrmLogin extends JFrame {
 	public void limpiar()
 	{
 		TxtUsuario.setText("");
-		TxtContraseña.setText("");
+		TxtContraseÃ±a.setText("");
 		TxtUsuario.requestFocus();
 	}
 	
 	public void salir()
 	{
-		int opc=JOptionPane.showConfirmDialog(null, "¿Desea salir del login?","Login",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+		int opc=JOptionPane.showConfirmDialog(null, "Â¿Desea salir del login?","Login",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		
 		if(opc==JOptionPane.YES_OPTION)
 		{
